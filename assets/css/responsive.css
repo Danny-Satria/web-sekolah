@@ -1,0 +1,420 @@
+@media screen and (max-width: 600px) {
+  /* navbar */
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    height: 90px;
+  }
+
+  .logo {
+    top: -2.5em;
+    left: -3.7em;
+  }
+
+  .logo-outter {
+    top: -2.5em;
+    left: -9em;
+  }
+
+  .menu {
+    display: none;
+    width: 100%;
+  }
+
+  .menu.aktif {
+    width: 150%;
+    display: block;
+    position: absolute;
+    top: 2em;
+    background-color: white;
+    padding: 10px 20px;
+    right: 0;
+    left: -2em;
+  }
+
+  .menu.aktif li {
+    margin: 10px 0;
+  }
+
+  .menu.aktif li a {
+    padding: 10px;
+    display: block !important;
+  }
+
+  .menu .dropdown {
+    position: static;
+    background: none;
+    padding-left: 20px;
+    background-color: white;
+    width: 100%;
+  }
+
+  .menu li:hover > .dropdown {
+    display: none;
+  }
+
+  .menu li.active > .dropdown {
+    display: block;
+  }
+
+  .menu .nested-dropdown .dropdown {
+    left: 0;
+    padding-left: 40px;
+    background-color: white;
+  }
+
+  .tombol {
+    position: absolute;
+    display: block;
+    top: -1em;
+    left: 9.3em;
+  }
+  /* navbar end*/
+
+  /* carousel */
+
+  .slider {
+    top: 5em;
+  }
+
+  .prev,
+  .next {
+    width: auto;
+    font-size: 0.9em;
+  }
+
+  .indicators {
+    bottom: 2em;
+  }
+
+  .indicator {
+    height: 12px;
+    width: 12px;
+  }
+
+  /* carousel end */
+
+  /* content */
+
+  /* summary */
+
+  .accordion-content .logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .accordion-content .logos img {
+    width: auto;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .accordion-header,
+  .accordion-content {
+    transition: all 0.3s ease-out;
+  }
+
+  .container-sum {
+    padding: 20px;
+  }
+
+  .heading-text {
+    top: 41em;
+    left: 0.2em;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .heading-text h1 {
+    font-size: 1.8em;
+  }
+
+  .heading-text p {
+    font-size: 0.9em;
+  }
+
+  .image-summary {
+    position: static;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .image-summary img {
+    max-width: 100%;
+    height: auto;
+    margin-left: 0;
+  }
+
+  .container-summary {
+    position: relative;
+    left: 0;
+    max-width: 100%;
+  }
+
+  .accordion-header {
+    padding: 15px 40px 15px 15px;
+    font-size: 1em;
+  }
+
+  .accordion-header::before {
+    right: 15px;
+    left: auto;
+  }
+
+  .accordion-content {
+    padding: 20px;
+  }
+
+  .logos {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 20px;
+  }
+
+  .logos img {
+    width: 100%;
+    max-width: 120px;
+    margin: 0 auto;
+  }
+
+  /* summary end */
+
+  .container {
+    position: relative;
+    top: 3em;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .text-section,
+  .image-section {
+    max-width: 100%;
+  }
+  .image-section {
+    top: 2em;
+    left: -6em;
+    width: 100px;
+  }
+
+  .image-section img {
+    width: 300px;
+  }
+
+  .text-section h1 {
+    font-size: 1.8em;
+  }
+
+  .text-section p {
+    font-size: 0.9em;
+  }
+
+  .button {
+    padding: 15px 15px 30px 15px;
+    font-size: 0.9em;
+  }
+
+  .image-menu {
+    left: 0em;
+    top: 3.5em;
+    gap: 1rem;
+  }
+  .image-menu img {
+    width: 90px;
+  }
+
+  /* client */
+
+  .clients-container {
+    flex-direction: column;
+  }
+
+  .clients-content,
+  .clients-video {
+    margin-bottom: 20px;
+  }
+
+  /* client end */
+
+  /* content end */
+
+  /* page profil */
+
+  /* content */
+
+  .about-us-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .image-container,
+  .text-container {
+    max-width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  .text-container h2 {
+    font-size: 2rem;
+  }
+
+  .text-container p {
+    font-size: 0.9rem;
+  }
+
+  .vision-mission-container {
+    top: 9em;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .text-container,
+  .image-container {
+    max-width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+
+  .text-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .text-container p {
+    font-size: 0.9rem;
+  }
+
+  /* content end */
+
+  /* page profil end */
+
+  /* page tim */
+
+  @media (max-width: 350px) {
+    .card-container {
+      width: 90%;
+      height: auto;
+    }
+
+    .card {
+      height: 450px;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+    }
+
+    h2 {
+      font-size: 1.5em;
+    }
+
+    .skills span {
+      font-size: 0.7em;
+    }
+  }
+
+  /* page tim end */
+
+  /* page penghargaan */
+
+  .timeline-item {
+    width: 100%;
+    left: 0;
+  }
+
+  .timeline-item:nth-child(odd) {
+    left: 0em;
+  }
+  .timeline-item:nth-child(odd) .timeline-date {
+    right: auto;
+    left: 1em;
+    z-index: 1000;
+  }
+
+  .timeline-item:nth-child(even) {
+    left: 0;
+  }
+
+  .timeline-container::after {
+    left: 20px;
+  }
+
+  .timeline-item .timeline-date {
+    right: auto;
+    left: 30px;
+  }
+
+  .timeline-item:nth-child(even) .timeline-date {
+    left: 30px;
+    z-index: 1000;
+  }
+
+  /* page penghargaan end */
+
+  /* page agenda */
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* page agenda end */
+
+  /* page kontak */
+
+  .contact-container {
+    flex-direction: column;
+  }
+
+  /* page kontak end */
+
+  /* footer */
+
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-section {
+    margin-bottom: 30px;
+  }
+
+  .footer-social ul {
+    flex-direction: column;
+  }
+
+  .footer-social ul li {
+    margin: 10px 0;
+  }
+
+  /* footer end */
+}
+
+.nav-active {
+  top: 0;
+}
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    -webkit-transform: translateY(40px);
+    -moz-transform: translateY(40px);
+    -ms-transform: translateY(40px);
+    -o-transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+  }
+}

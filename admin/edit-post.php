@@ -1,61 +1,51 @@
 <?php
+// Koneksi ke database
 include "../include/config.php";
 
-// Fungsi untuk menangani permintaan AJAX
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    if ($_POST['action'] === 'get_article') {
-        $id = intval($_POST['id']);
-        $sql = "SELECT id_post, judul, artikel, penulis FROM post WHERE id_post = $id";
-        $result = $koneksi->query($sql);
+// Ambil data artikel untuk ditampilkan di tabel
+$result = $koneksi->query("SELECT * FROM post");
 
-        if ($result->num_rows > 0) {
-            echo json_encode($result->fetch_assoc());
-        } else {
-            echo json_encode(['error' => 'Data tidak ditemukan']);
-        }
-        exit;
-    } elseif ($_POST['action'] === 'update_article') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['id_post'])) {
         $id = intval($_POST['id_post']);
-        $judul = $koneksi->real_escape_string($_POST['judul']);
-        $isi = $koneksi->real_escape_string($_POST['isi']);
-        $penulis = $koneksi->real_escape_string($_POST['penulis']);
-
+        $judul = htmlspecialchars($_POST['judul']);
+        $isi = htmlspecialchars($_POST['isi']);
+        $penulis = htmlspecialchars($_POST['penulis']);
         $gambar = '';
-        if (!empty($_FILES['gambar']['name'])) {
-            $targetDir = "../uploads/";
-            $gambar = $targetDir . basename($_FILES["gambar"]["name"]);
-            move_uploaded_file($_FILES["gambar"]["tmp_name"], $gambar);
+
+        // Proses upload gambar jika ada
+        if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] === 0) {
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($_FILES["gambar"]["name"]);
+            if (move_uploaded_file($_FILES["gambar"]["tmp_name"], $target_file)) {
+                $gambar = $target_file;
+            }
         }
 
-        $sql = "UPDATE post SET judul = '$judul', artikel = '$isi', penulis = '$penulis'";
+        // Update query
+        $query = "UPDATE post SET judul = ?, artikel = ?, penulis = ?";
         if (!empty($gambar)) {
-            $sql .= ", gambar = '$gambar'";
+            $query .= ", gambar = ?";
         }
-        $sql .= " WHERE id_post = $id";
+        $query .= " WHERE id_post = ?";
 
-        if ($koneksi->query($sql) === TRUE) {
-            echo json_encode(['success' => 'Artikel berhasil diperbarui']);
+        $stmt = $koneksi->prepare($query);
+        if (!empty($gambar)) {
+            $stmt->bind_param("ssssi", $judul, $isi, $penulis, $gambar, $id);
         } else {
-            echo json_encode(['error' => 'Gagal memperbarui artikel: ' . $koneksi->error]);
+            $stmt->bind_param("sssi", $judul, $isi, $penulis, $id);
         }
-        exit;
-    } elseif ($_POST['action'] === 'delete_article') {
-        $id = intval($_POST['id']);
-        $sql = "DELETE FROM post WHERE id_post = $id";
-        if ($koneksi->query($sql) === TRUE) {
-            echo json_encode(['success' => 'Artikel berhasil dihapus']);
+
+        if ($stmt->execute()) {
+            $success_message = "Artikel berhasil diperbarui!";
         } else {
-            echo json_encode(['error' => 'Gagal menghapus artikel: ' . $koneksi->error]);
+            $error_message = "Gagal memperbarui artikel.";
         }
-        exit;
+
+        $stmt->close();
     }
 }
-
-// Query untuk mendapatkan semua data artikel
-$sql = "SELECT id_post, judul, gambar, penulis, tgl_post FROM post ORDER BY tgl_post DESC";
-$result = $koneksi->query($sql);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,13 +85,6 @@ $result = $koneksi->query($sql);
             max-width: 100px;
             max-height: 60px;
             border-radius: 5px;
-        }
-        a {
-            text-decoration: none;
-            color: #0056b3;
-        }
-        a:hover {
-            text-decoration: underline;
         }
         .btn {
             padding: 5px 10px;
@@ -149,6 +132,8 @@ $result = $koneksi->query($sql);
 <body>
 <div class="container">
     <h2>Daftar Artikel</h2>
+    <?php if (!empty($success_message)) { echo "<p style='color: green;'>$success_message</p>"; } ?>
+    <?php if (!empty($error_message)) { echo "<p style='color: red;'>$error_message</p>"; } ?>
     <table>
         <thead>
             <tr>
@@ -174,8 +159,7 @@ $result = $koneksi->query($sql);
                     echo "<td>" . htmlspecialchars($row['penulis']) . "</td>";
                     echo "<td>" . date("d F Y", strtotime($row['tgl_post'])) . "</td>";
                     echo "<td>
-                            <button class='btn' onclick='openModal(" . $row['id_post'] . ")'>Edit</button>
-                            <button class='btn btn-danger' onclick='deleteArticle(" . $row['id_post'] . ")'>Hapus</button>
+                            <button class='btn' onclick='openModal(" . json_encode($row) . ")'>Edit</button>
                           </td>";
                     echo "</tr>";
                 }
@@ -202,72 +186,23 @@ $result = $koneksi->query($sql);
             <textarea name="isi" id="editContent" rows="5" required></textarea>
             <label for="editAuthor">Penulis:</label>
             <input type="text" name="penulis" id="editAuthor" required>
-            <button type="button" class="btn" onclick="updateArticle()">Simpan Perubahan</button>
+            <button type="submit" class="btn">Simpan Perubahan</button>
         </form>
     </div>
 </div>
 
 <script>
-// Fungsi untuk membuka modal
-function openModal(id) {
-    const modal = document.getElementById('editModal');
-    fetch('', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `action=get_article&id=${id}`
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            alert(data.error);
-        } else {
-            document.getElementById('editId').value = data.id_post;
-            document.getElementById('editTitle').value = data.judul;
-            document.getElementById('editContent').value = data.artikel;
-            document.getElementById('editAuthor').value = data.penulis;
-            modal.style.display = 'block';
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Fungsi untuk menutup modal
-function closeModal() {
-    document.getElementById('editModal').style.display = 'none';
-}
-
-// Fungsi untuk memperbarui artikel
-function updateArticle() {
-    const formData = new FormData(document.getElementById('editForm'));
-    formData.append('action', 'update_article');
-    fetch('', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert(data.success || data.error);
-        if (data.success) location.reload();
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Fungsi untuk menghapus artikel
-function deleteArticle(id) {
-    if (confirm('Apakah Anda yakin ingin menghapus artikel ini?')) {
-        fetch('', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `action=delete_article&id=${id}`
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.success || data.error);
-            if (data.success) location.reload();
-        })
-        .catch(error => console.error('Error:', error));
+    function openModal(data) {
+        document.getElementById('editId').value = data.id_post;
+        document.getElementById('editTitle').value = data.judul;
+        document.getElementById('editContent').value = data.isi;
+        document.getElementById('editAuthor').value = data.penulis;
+        document.getElementById('editModal').style.display = 'block';
     }
-}
+
+    function closeModal() {
+        document.getElementById('editModal').style.display = 'none';
+    }
 </script>
 </body>
 </html>

@@ -15,7 +15,7 @@
           <li>
             <a href="#" class="dropdown-toggle">Tentang Kami</a>
             <ul class="dropdown">
-              <li><a href="#">Profil</a></li>
+              <li><a href="profil.html">Profil</a></li>
               <li><a href="tim.php">Tim</a></li>
               <li class="nested-dropdown">
                 <a href="#" class="dropdown-toggle">Cakupan</a>
@@ -26,7 +26,7 @@
                     >
                   </li>
                   <li>
-                    <a href="">Digital Marketing</a>
+                    <a href="#">Digital Marketing</a>
                   </li>
                 </ul>
               </li>
@@ -51,7 +51,7 @@
           </li>
           <li><a href="#">Klien</a></li>
           <li><a href="post.php">Informasi</a></li>
-          <li><a href="#">Kontak</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
         </ul>
         <div class="tombol">☰</div>
       </div>

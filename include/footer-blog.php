@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" style="background-color: #222">
       <div class="footer-container">
         <div class="footer-section logo-and-description">
           <img src="logo.png" alt="M1 Solution Logo" class="footer-logo" />
@@ -12,9 +12,9 @@
         <div class="footer-section git-solution">
           <h3>M1 SOLUTION</h3>
           <ul>
-            <li><a href="pages/profil.html">Profil</a></li>
-            <li><a href="pages/post.php">Informasi</a></li>
-            <li><a href="pages/kontak.html">Contact Us</a></li>
+            <li><a href="../pages/profil.html">Profil</a></li>
+            <li><a href="../pages/post.php">Informasi</a></li>
+            <li><a href="../pages/kontak.php">Contact Us</a></li>
           </ul>
         </div>
         <div class="footer-section marketing-info">

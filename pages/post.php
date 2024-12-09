@@ -268,7 +268,7 @@ $result = mysqli_query($koneksi, $sql);
 <!-- Header -->
 <?php  include "../include/header-page.php";?>
 <header class="header">
-    <h1>Artikel</h1>
+    <h1>Blog</h1>
 </header>
 <!-- Header End -->
 
@@ -315,7 +315,7 @@ $result = mysqli_query($koneksi, $sql);
 
 
 <!-- Footer -->
-<?php  include "../include/footer.php";?>
+<?php  include "../include/footer-page.php";?>
 <!-- Footer End -->
 
 <!-- js -->

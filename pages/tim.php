@@ -45,6 +45,17 @@ $result = $stmt->get_result();
     <link rel="stylesheet" href="../assets/css/style.css">
     <title>Tim</title>
     <style>
+
+.header {
+            background: #4dccec;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            top: 7em;
+        }
+
         .card-assamble {
             display: flex;
             flex-wrap: wrap;
@@ -148,7 +159,12 @@ $result = $stmt->get_result();
     </style>
 </head>
 <body>
+    <!-- header -->
     <?php include "../include/header-page.php"; ?>
+    <header class="header">
+        <h1>Our Team</h1>
+    </header>
+    <!-- header end -->
     
     <?php if ($result && $result->num_rows > 0): ?>
         <div class="card-assamble">
@@ -189,6 +205,10 @@ $result = $stmt->get_result();
             <p>Tidak ada data untuk ditampilkan.</p>
         </div>
     <?php endif; ?>
+
+<!-- Footer -->
+<?php  include "../include/footer-page.php";?>
+<!-- Footer End -->
 
     <script>
         // Menangani error loading gambar

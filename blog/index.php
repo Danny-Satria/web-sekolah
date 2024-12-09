@@ -49,8 +49,13 @@ body {
   color: #333;
 }
 
-h1,
-h2,
+
+h1 {
+  color: #000;
+}
+h2 {
+  color: #000;
+}
 h3 {
   color: #0056b3;
 }
@@ -290,29 +295,107 @@ a:hover {
             font-size: 0.8rem;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 10px;
-            background: #0056b3;
-            color: white;
-            margin-top: 20px;
-        }
+        /* footer */
+
+.main-content {
+  flex: 1;
+}
+
+.footer {
+  background-color: #222;
+  padding: 40px 20px;
+  width: 100%;
+  position: relative;
+  bottom: -40em;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 20px;
+}
+
+.footer-section h3 {
+  color: #00bfff;
+  margin-bottom: 20px;
+}
+
+.footer-section p,
+.footer-section ul {
+  line-height: 1.6;
+  color: #abaaa9;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: #bbb;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  color: #fff;
+}
+
+.footer-logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.footer-social {
+  text-align: center;
+  margin-top: 20px;
+  border-top: 1px solid #444;
+  padding-top: 20px;
+}
+
+.footer-social ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.footer-social ul li {
+  margin: 0 10px;
+}
+
+.footer-social ul li a img {
+  width: 30px;
+  height: 30px;
+}
+
+/* footer end */
 
     </style>
   </head>
   <body>
 
-        <?php include_once "../include/header-blog.php";?>
+        <?php include "../include/header-blog.php";?>
 
 <header class="header">
-    <h1>Portal Berita</h1>
+    <h1 style="color: white;">Portal Berita</h1>
 </header>
 
 <main class="content">
     <!-- Artikel Utama -->
-    <article class="main-article">
-        <h2><?= htmlspecialchars($article['judul']) ?></h2>
+    <article class="main-article" >
+        <h2 style="color: black;"><?= htmlspecialchars($article['judul']) ?></h2>
         <p><small>Diposting pada <?= htmlspecialchars($article['tgl_post']) ?></small></p>
         <img src="<?= htmlspecialchars($article['gambar']) ?>" alt="<?= htmlspecialchars($article['judul']) ?>">
         <p><?= nl2br(htmlspecialchars($article['artikel'])) ?></p>
@@ -387,9 +470,32 @@ a:hover {
     </aside>
 </main>
 
-<footer class="footer">
-    <p>&copy; 2024 Portal Berita</p>
-</footer>
+<!-- Footer -->
+<?php  include "../include/footer-blog.php";?>
+<!-- Footer End -->
+
+<script>
+  // fungsi navbar responsif
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleButton = document.querySelector(".tombol");
+  const menu = document.querySelector(".menu");
+  const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+
+  toggleButton.addEventListener("click", function () {
+    menu.classList.toggle("aktif");
+  });
+
+  dropdownToggles.forEach((toggle) => {
+    toggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      this.parentElement.classList.toggle("active");
+    });
+  });
+});
+
+// fungsi navbar responsif end
+
+</script>
 
 </body>
 </html>

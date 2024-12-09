@@ -12,9 +12,9 @@
         <div class="footer-section git-solution">
           <h3>M1 SOLUTION</h3>
           <ul>
-            <li><a href="pages/profil.html">Profil</a></li>
-            <li><a href="pages/post.php">Informasi</a></li>
-            <li><a href="pages/kontak.html">Contact Us</a></li>
+            <li><a href="profil.html">Profil</a></li>
+            <li><a href="post.php">Informasi</a></li>
+            <li><a href="kontak.html">Contact Us</a></li>
           </ul>
         </div>
         <div class="footer-section marketing-info">

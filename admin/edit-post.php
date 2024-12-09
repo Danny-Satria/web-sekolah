@@ -65,6 +65,9 @@ $result = $koneksi->query($sql);
     <style>
         .container {
             max-width: 1100px;
+            position: relative;
+            top: 5em;
+            left: 7em;
             margin: 20px auto;
             background: white;
             padding: 20px;
@@ -93,6 +96,13 @@ $result = $koneksi->query($sql);
             max-height: 60px;
             border-radius: 5px;
         }
+        a {
+            text-decoration: none;
+            color: #0056b3;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
         .btn {
             padding: 5px 10px;
             border: none;
@@ -101,8 +111,14 @@ $result = $koneksi->query($sql);
             background: #0056b3;
             cursor: pointer;
         }
+        .btn:hover {
+            background: #003f8a;
+        }
         .btn-danger {
             background: #d9534f;
+        }
+        .btn-danger:hover {
+            background: #c9302c;
         }
         .modal {
             display: none;

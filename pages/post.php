@@ -270,7 +270,7 @@ $result = mysqli_query($koneksi, $sql);
         transition: border-radius 0.5s ease;
         background: var(--input-bg, #fff);
         margin: 150px 0 50px 0;
-        left: 70em;
+        left: 38em;
       }
       /* styling of Input */
       .input {

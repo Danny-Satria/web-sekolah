@@ -10,9 +10,6 @@
             <ul class="dropdown">
               <li><a href="#">Profil</a></li>
               <li><a href="pages/tim.php">Tim</a></li>
-              <li>
-                <a href="">Penghargaan</a>
-              </li>
               <li class="nested-dropdown">
                 <a href="#" class="dropdown-toggle">Cakupan</a>
                 <ul class="dropdown">

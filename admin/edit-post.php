@@ -103,30 +103,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .btn-danger:hover {
             background: #c9302c;
         }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
         .modal-content {
-            background: white;
-            margin: 10% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 600px;
-        }
-        .close {
-            float: right;
-            font-size: 24px;
-            cursor: pointer;
-        }
+        background: white;
+        margin: 5% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        font-family: Arial, sans-serif;
+    }
+    .modal-content h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    .modal-content label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
+    .modal-content input[type="text"],
+    .modal-content textarea,
+    .modal-content input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    .modal-content textarea {
+        resize: vertical;
+    }
+    .modal-content button {
+        background: #0056b3;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .modal-content button:hover {
+        background: #003f8a;
+    }
+    .close {
+        float: right;
+        font-size: 20px;
+        color: #aaa;
+        cursor: pointer;
+    }
+    .close:hover {
+        color: #000;
+    }
     </style>
 </head>
 <body>
@@ -179,24 +210,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form id="editForm" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id_post" id="editId">
             <label for="editTitle">Judul Artikel:</label>
-            <input type="text" name="judul" id="editTitle" required>
+            <input type="text" name="judul" id="editTitle" placeholder="Masukkan judul artikel" required>
+            
             <label for="editImage">Upload Gambar:</label>
             <input type="file" name="gambar" id="editImage" accept="image/*">
+            
             <label for="editContent">Isi Artikel:</label>
-            <textarea name="isi" id="editContent" rows="5" required></textarea>
+            <textarea name="isi" id="editContent" rows="5" placeholder="Masukkan isi artikel" required></textarea>
+            
             <label for="editAuthor">Penulis:</label>
-            <input type="text" name="penulis" id="editAuthor" required>
-            <button type="submit" class="btn">Simpan Perubahan</button>
+            <input type="text" name="penulis" id="editAuthor" placeholder="Masukkan nama penulis" required>
+            
+            <button type="submit">Simpan Perubahan</button>
         </form>
     </div>
 </div>
 
 <script>
     function openModal(data) {
-        document.getElementById('editId').value = data.id_post;
-        document.getElementById('editTitle').value = data.judul;
-        document.getElementById('editContent').value = data.isi;
-        document.getElementById('editAuthor').value = data.penulis;
+        document.getElementById('editId').value = data.id_post || '';
+        document.getElementById('editTitle').value = data.judul || '';
+        document.getElementById('editContent').value = data.isi || '';
+        document.getElementById('editAuthor').value = data.penulis || '';
         document.getElementById('editModal').style.display = 'block';
     }
 
@@ -204,5 +239,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         document.getElementById('editModal').style.display = 'none';
     }
 </script>
+
 </body>
 </html>
